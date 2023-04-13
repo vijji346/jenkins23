@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven ' Apache Maven 3.9.1 '
+        maven 'Apache Maven 3.9.1'
 		
     }
 
@@ -9,40 +9,34 @@ pipeline {
         stage('git clone') 
 		{
             steps {
-              git credentialsID: 'github' , url: 'https://github.com/vijji346/april23.git'
+              git credentialsId: 'github', url: 'https://github.com/kartikeyapro/ks.git'
             }
-			}
-	    stage('Code Clean') 
+		}
+        stage('Maven Clean') 
 		{
             steps {
-			sh 'mvn clean'
+			sh 'maven clean'
             }
-			}
-        stage('Code Validate') 
+	    }
+        stage('Maven Test') 
 		{
             steps {
-			sh 'mvn validate'
+			sh 'maven test'
             }
-			}
-        stage('Code Compile') 
+		}
+        stage('Maven Compile') 
 		{
             steps {
-			sh 'mvn compile'
+			sh 'maven compile'
                
             }
-		    }
-		stage('Code Test')  
+		}
+		stage('Maven Package')  
 		{
             steps {
-            sh 'mvn test'
+            sh 'maven package'
             }
-            }
-        stage('Code package')  
-		{
-            steps {
-             sh 'mvn package'
-            }
-            }			 
-}
+        }	 
+    }
 }
 
